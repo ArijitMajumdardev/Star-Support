@@ -2,6 +2,7 @@ import DonationForm from "@/components/DonationForm"
 import { connectDB } from "@/lib/database"
 import { ProfileInfoModel } from "@/models/profileInfo"
 import Image from "next/image"
+import Script from "next/script"
 import { FaCoffee } from "react-icons/fa"
 import { LuCoffee } from "react-icons/lu"
 
@@ -23,6 +24,7 @@ export default async function singleProfilePage({ params } : Props) {
     }
     return (
         <div className="h-screen min-h-screen">
+  
             <div className="w-full h-48">
                 <Image src={profileInfoDoc.coverUrl} height={2048} width={2048} alt="cover image"  className="h-48 object-cover object-center "/>
 
@@ -57,7 +59,7 @@ export default async function singleProfilePage({ params } : Props) {
                     </div>
 
                     <div className="bg-white rounded-xl p-4 shadow-sm">
-                        <DonationForm/>
+                        <DonationForm email={profileInfoDoc.email} toUser={profileInfoDoc.user} />
                     </div>
                 </div>
 
