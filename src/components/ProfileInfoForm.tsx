@@ -132,18 +132,32 @@ export default function ProfileInfoForm({ profileInfo, total }: Props) {
         </div>
 
 
-        <div className="flex justify-between">
-          <div className="flex items-center gap-2">
-            Total money received: <span className="text-2xl">${total}</span>
-          </div>
-          <a
-            className="bg-yellow-300 px-4 py-2 rounded-lg flex items-center gap-2"
-            href="mailto:payouts@bmac.io"
-          >
-            Request a payout
-            {/* <FontAwesomeIcon icon={faArrowRight} /> */}
-          </a>
-        </div>
+        <div className="flex flex-col md:flex-row justify-between items-center bg-white shadow-lg p-6 rounded-lg border border-gray-200">
+  <div className="flex items-center gap-2 text-gray-700 font-semibold text-lg">
+    <span>Total money received:</span>
+    <span className="text-2xl text-green-600 font-bold">${total}</span>
+  </div>
+  <div
+    className="mt-4 md:mt-0 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-all duration-200 ease-in-out shadow-md"
+   
+  >
+    Request a payout
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+      />
+    </svg>
+  </div>
+</div>
 
 
 

@@ -73,7 +73,7 @@ export default async function singleProfilePage({ params } : Props) {
             {donations.length && (
               <div className="mt-2 max-h-[35vh] overflow-scroll no-scrollbar">
                 {donations.map(donation => (
-                  <div className="py-2">
+                  <div className="py-2" key={donation.orderId}>
                     <h3>
                       <span className="font-semibold">{donation.name}</span>
                       {' '}

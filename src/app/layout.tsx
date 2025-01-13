@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Provider from "@/components/Provider";
 import { getServerSession } from "next-auth";
 import { authoption } from "./api/auth/[...nextauth]/route";
+import Footer from "@/components/Footer";
 
 
 const geistSans = Geist({
@@ -40,7 +41,8 @@ export default async function RootLayout({
         <Header  />
         
           {children }
-        <footer className="w-full h-52 bg-red-400"></footer>
+            {/* <footer className="w-full h-52 bg-red-400"></footer> */}
+            <Footer/>
           </div>
         </Provider>
         
