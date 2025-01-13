@@ -17,7 +17,9 @@ const Header = () => {
       <>
           <header className="w-full h-24 bg-white">
           <nav className="w-full h-full bg-green-300 flex justify-between">
-            <div className="h-full w-1/4 bg-yellow-200 font-semibold text-2xl flex justify-center items-center ">Buy me a coke</div>
+          <div className="h-full w-1/4 bg-yellow-200 font-semibold text-2xl flex justify-center items-center ">
+          <Link href="/">Buy me a coke</Link>
+          </div>
             <div className="h-full w-2/4   flex justify-around items-center font-medium">
             <Link href="/about">About</Link>
             <Link href="/about">FAQ</Link>

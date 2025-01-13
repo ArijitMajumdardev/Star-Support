@@ -72,6 +72,8 @@
 
 
 
+import { connectDB } from "@/lib/database";
+import { DonationModel } from "@/models/donation";
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
@@ -81,11 +83,32 @@ const razorpay = new Razorpay({
 });
 
 export async function POST(req: Request) {
-  const { amount } = await req.json();
+  try {
+    await connectDB();
+    const { amount, name, message, email, toUser } = await req.json();
+    console.log("this is the amount  ",amount,name,message,toUser)
+    
   const order = await razorpay.orders.create({
     amount,
     currency: "INR",
   });
 
+    console.log("order : ",order)
+        const donationDoc = await DonationModel.create({
+        amount,
+        name,
+        message,
+        email,
+        toUser,
+        orderId: order.id,
+    });
+    
+    console.log(amount, name, message, email, toUser)
+
   return NextResponse.json(order);
+  
+} catch (error) {
+  console.error("Error creating Razorpay order:", error);
+    return NextResponse.json({ error: "Internal Server Error" })
+}
 }

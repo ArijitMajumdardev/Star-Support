@@ -30,7 +30,7 @@ export default async function RootLayout({
 }>) {
 
   const session = await getServerSession(authoption)
-  console.log("server session",session)
+  
   return (
     <html lang="en">
       <body >
@@ -39,7 +39,7 @@ export default async function RootLayout({
 
         <Header  />
         
-          {children}
+          {children }
         <footer className="w-full h-52 bg-red-400"></footer>
           </div>
         </Provider>

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { connectDB } from "@/lib/database";
+import { DonationModel } from "@/models/donation";
 
 const generatedSignature = (
   razorpayOrderId: string,
@@ -26,9 +28,21 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Probably some database calls here to update order or add premium status to user
-  return NextResponse.json(
-    { message: "payment verified successfully", isOk: true },
-    { status: 200 }
-  );
+    // Probably some database calls here to update order or add premium status to user
+    try {
+        connectDB()
+        await DonationModel.updateOne({ orderId }, {
+            paid:true
+        })
+
+        return NextResponse.json(
+            { message: "payment verified successfully", isOk: true },
+            { status: 200 }
+          );
+        
+    } catch (error) {
+        console.error(error);
+      return NextResponse.json({ isOk: false, error: "Failed to update database" },{status:500});
+    }
+ 
 }

@@ -4,10 +4,13 @@ import React, { useEffect, useState } from "react";
 import { FaCoffee } from "react-icons/fa";
 import Script from "next/script";
 import Razorpay from "razorpay";
+import toast from "react-hot-toast";
 
 function DonationForm({ email,toUser }: { email: string,toUser:string }) {
   const [numberInValue, setNumberInValue] = useState("");
   const [amount, setAmount] = useState(1);
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (numberInValue) {
@@ -24,80 +27,23 @@ function DonationForm({ email,toUser }: { email: string,toUser:string }) {
 
     async function handleFormSubmit(formData: FormData) {
         console.log("inside form submit")
-    formData.set("amount", amount.toString());
-      formData.set("email", email);
+        formData.set("amount", amount.toString());
+        formData.set("email", email);
         formData.set("toUser", toUser)
-        
-
+    
+            console.log(name,message)
         // const { SendAmount, SendName, SendMessage, SendEmail,SendToUser } = Object.fromEntries(formData);
 
-        // try {
-        //     // Make an API call to your backend to create the Razorpay order
-        //     const response = await fetch("/api/order", {
-        //       method: "POST",
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //       },
-        //       body: JSON.stringify({
-        //         amount: SendAmount,
-        //         email: SendEmail,
-        //         toUser: SendToUser,
-        //         name: SendName,
-        //         message: SendMessage,
-        //       }),
-        //     });
-
-        //     console.log("res pom",response)
-
-        
-        //     // Check if the response is ok (status code 200)
-        //     if (!response.ok) {
-        //       throw new Error("Failed to create Razorpay order");
-        //     }
-        
-        // //     // Parse the response to get the order data
-        //     const order = await response.json();
-        //     console.log("Razorpay Order:", order);
- 
-
-        //     const paymentData = {
-        //         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        //         order_id: order.id,
-          
-        //         handler: async function (response: any) {
-        //           // verify payment
-        //           const res = await fetch("/api/verifyOrder", {
-        //             method: "POST",
-        //             body: JSON.stringify({
-        //               orderId: response.razorpay_order_id,
-        //               razorpayPaymentId: response.razorpay_payment_id,
-        //               razorpaySignature: response.razorpay_signature,
-        //             }),
-        //           });
-        //           const data = await res.json();
-        //           console.log(data);
-        //           if (data.isOk) {
-        //             // do whatever page transition you want here as payment was successful
-        //             alert("Payment successful");
-        //           } else {
-        //             alert("Payment failed");
-        //           }
-        //         },
-        //       };
-          
-        //       const payment = new (window as any).Razorpay(paymentData);
-        //       payment.open();
-        //   } catch (error) {
-        //     console.error("Error during form submission:", error);
-        //   }
+       
 
     }
     
 
     const createOrder = async () => {
+        console.log("this is the amount  ",amount,name,message,toUser)
         const res = await fetch("/api/createOrder", {
           method: "POST",
-          body: JSON.stringify({ amount: amount*5 * 100 }),
+          body: JSON.stringify({ amount: amount*5*100 ,name,message,toUser,email}),
         });
         const data = await res.json();
     
@@ -118,10 +64,11 @@ function DonationForm({ email,toUser }: { email: string,toUser:string }) {
             const data = await res.json();
             console.log(data);
             if (data.isOk) {
-              // do whatever page transition you want here as payment was successful
-              alert("Payment successful");
+                // do whatever page transition you want here as payment was successful
+                
+                toast.success('Thanks for your donation!');
             } else {
-              alert("Payment failed");
+                toast.error('Payment Failed');
             }
           },
         };
@@ -185,7 +132,8 @@ function DonationForm({ email,toUser }: { email: string,toUser:string }) {
           name="name"
           type="text"
           placeholder="Your name"
-          className="outline-none p-2  "
+                  className="outline-none p-2  "
+                  onChange={(e)=>setName(e.target.value)}
         />
       </div>
       <div className="mt-3 ">
@@ -193,7 +141,8 @@ function DonationForm({ email,toUser }: { email: string,toUser:string }) {
           name="message"
           id=""
           placeholder="Say something nice"
-          className="outline-none p-2  "
+                  className="outline-none p-2  "
+                  onChange={(e)=>setMessage(e.target.value)}
         ></textarea>
       </div>
           <div className="mt-2">
