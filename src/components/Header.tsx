@@ -1,68 +1,88 @@
-'use client'
+'use client';
 
-import React from 'react'
-import Link from "next/link";
-import { useSession,signIn,signOut } from 'next-auth/react';
+import React from 'react';
+import Link from 'next/link';
+import { useSession, signIn } from 'next-auth/react';
 import Image from 'next/image';
-import { parseFullName } from 'parse-full-name'
+import { parseFullName } from 'parse-full-name';
+import { FaSearch } from 'react-icons/fa';
+import { Poppins } from 'next/font/google';
+
+
+
 
 const Header = () => {
-  const {data : session , status} = useSession()
-  console.log("",session)
-  const pic = session?.user.image 
-  console.log("pic ", pic)
-  const {first} = parseFullName(session?.user.name || ' ')
+  const { data: session } = useSession();
+  const pic = session?.user?.image;
+  const { first } = parseFullName(session?.user?.name || ' ');
+
+
 
   return (
-      <>
-          <header className="w-full h-24 bg-white">
-          <nav className="w-full h-full bg-green-300 flex justify-between">
-          <div className="h-full w-1/4 bg-yellow-200 font-semibold text-2xl flex justify-center items-center ">
-          <Link href="/">Buy me a coke</Link>
+    <>
+      <header className={`w-full h-20 bg-white/75 shadow-lg fixed top-0 left-0 z-50 backdrop-blur-sm`}>
+        <nav className="w-full max-w-screen-xl mx-auto h-full flex">
+          {/* Brand Section */}
+          <div className="flex-1 flex items-center justify-center font-semibold text-2xl">
+            <Link href="/" className='flex '>
+              <Image src={"/soda_icon.png"} alt='logo' width={36} height={36} />
+              <span>Buy me a coke</span>
+            </Link>
           </div>
-            <div className="h-full w-2/4   flex justify-around items-center font-medium">
-            <Link href="/about">About</Link>
-            <Link href="/about">FAQ</Link>
-            <Link href="/about">Contact</Link>
-            
-              
-            <div className="w-1/3 flex justify-between ">
-              {
-                session ? (
-                  <>
-                     <Link href={'/profile'} className="bg-yellow-300 rounded-full py-1 flex items-center justify-around min-w-20">
 
-                    <Image width="38" height="38"
-                      src={session.user?.image as string || ""}
-                      // alt={session.user?.name || "User"}
-                        alt="avatar"
-                      className="rounded-full"
-                      />
-                      
-                     <span className='text-center min-w-16  max-w-20 truncate mr-3 ml-2'> {first}</span>
-                   
-                  </Link>
-                  </>
-                ) : (
-                    <>
-                       <button className="border-2 rounded-full px-6 py-2 " onClick={()=>signIn('google')} >
-                    Login
-                  </button>
-                  <button className="bg-yellow-300 rounded-full px-6 py-2">
-                    Sign up
-                  </button>
-
-                    </>
-                )
-              }
-             
-              </div>
+          {/* Search Bar Section */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="relative w-full max-w-md">
+              <input
+                type="text"
+                placeholder="Search creator"
+                className="w-full py-2 pl-4 pr-10 border rounded-full focus:outline-none focus:ring-2 focus:ring-red-100"
+              />
+              <button className="absolute right-3 top-2 text-gray-600  ">
+                <FaSearch size={24} className=''/>
+              </button>
             </div>
+          </div>
 
-          </nav>
-        </header>
-      </>
-  )
-}
+          {/* Links Section */}
+          <div className="flex-1 flex items-center justify-center space-x-6 font-medium">
+            <Link href="/about" className="hover:text-red-500 transition duration-300">
+              About
+            </Link>
+            <Link href="/faq" className="hover:text-red-500 transition duration-300">
+              FAQ
+            </Link>
+            <Link href="/contact" className="hover:text-red-500 transition duration-300">
+              Contact
+            </Link>
+            {session ? (
+              <Link
+                href="/profile"
+                className="bg-yellow-300 rounded-full py-1 px-4 flex items-center hover:shadow-lg transition duration-300"
+              >
+                <Image
+                  width="38"
+                  height="38"
+                  src={pic || ''}
+                  alt="avatar"
+                  className="rounded-full"
+                />
+                <span className="ml-2 truncate">{first}</span>
+              </Link>
+            ) : (
+              <button
+                className="border border-red-300 rounded-full px-4 py-2 hover:bg-red-100 transition duration-300"
+                onClick={() => signIn('google')}
+              >
+                Login
+              </button>
+            )}
+          </div>
+        </nav>
+      </header>
+      <div className="h-20"></div> {/* Spacer to prevent content overlap */}
+    </>
+  );
+};
 
-export default Header
+export default Header;

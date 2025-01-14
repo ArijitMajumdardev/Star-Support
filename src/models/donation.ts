@@ -1,8 +1,8 @@
 import {model, models, Schema} from "mongoose";
 
 export type Donation = {
-    orderId: string,
-    toUser:string,
+    orderId: string;
+    toUser: string;
   amount: number;
   name: string;
   message?: string;

@@ -8,14 +8,18 @@ export default async function Home() {
   const session = await getServerSession(authoption);
 
   return (
-    <main className="w-full min-h-screen bg-white">
+    <main className={`w-full min-h-screen bg-white  `}>
       <div className="w-full h-[90vh] flex justify-center items-center">
-        <div className="w-4/6 mx-auto text-center">
-          <h1 className="text-7xl font-bold pt-40 text-gray-800 leading-tight">
+        <div className="w-4/6 mx-auto text-center flex flex-col items-center ">
+        <div className="w-52 bg-red-300/40 border-red-700/50 border h-9 rounded-full flex items-center justify-center">
+  #1 platform for support
+</div>
+
+          <h1 className={`text-7xl font-bold pt-35 text-gray-800 leading-tight `}>
             Support Your<br />
             <span className="text-yellow-500">Creative Journey</span>
           </h1>
-          <h2 className="text-xl mt-4 mb-8 text-gray-600">
+          <h2 className="text-xl  mb-8 text-gray-600">
             Welcome support for your work with ease.<br />
             Making it simple to fund your passion!
           </h2>
