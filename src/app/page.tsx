@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import GetStartedButton from "@/components/GetStartedButton";
 import Image from "next/image";
+import FAQ from "@/components/FAQ";
 
 export default async function Home() {
   const session = await getServerSession(authoption);
@@ -123,6 +124,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <FAQ/>
     </main>
   );
 }
