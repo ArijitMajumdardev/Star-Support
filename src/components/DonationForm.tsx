@@ -1,7 +1,7 @@
 "use client";
 import { createDonation } from "@/actions/donationActions";
 import React, { useEffect, useState } from "react";
-import { FaCoffee } from "react-icons/fa";
+import { FaCoffee, FaStar } from "react-icons/fa";
 import Script from "next/script";
 import Razorpay from "razorpay";
 import toast from "react-hot-toast";
@@ -86,8 +86,8 @@ function DonationForm({ email,toUser }: { email: string,toUser:string }) {
   return (
       <form action={handleFormSubmit}>
           <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
-      <div className="border border-yellow-300 bg-yellow-300/10 rounded-xl p-4 flex gap-2 items-center">
-        <FaCoffee size={36} />
+      <div className="border border-red-300 bg-red-300/10 rounded-xl p-4 flex gap-2 items-center">
+        <FaStar size={36} />
         <span>x</span>
         <button
           type="button"
@@ -120,7 +120,7 @@ function DonationForm({ email,toUser }: { email: string,toUser:string }) {
           5
         </button>
         <input
-          className="w-12 h-12 border border-yellow-300 rounded-xl text-center"
+          className="w-12 h-12 border border-red-300 rounded-xl text-center"
           type="number"
           placeholder="10"
           onChange={(ev) => setNumberInValue(ev.target.value)}
@@ -150,7 +150,7 @@ function DonationForm({ email,toUser }: { email: string,toUser:string }) {
         type="text/javascript"
         src="https://checkout.razorpay.com/v1/checkout.js"
       />
-        <button type="submit" className="bg-yellow-300 w-full rounded-xl py-2 font-semibold"  onClick={(e) => {
+        <button type="submit" className="bg-red-300 w-full rounded-xl py-2 font-semibold"  onClick={(e) => {
     e.preventDefault(); // Prevent form submission
     createOrder(); // Trigger Razorpay payment
   }}>

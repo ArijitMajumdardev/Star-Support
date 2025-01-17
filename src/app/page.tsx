@@ -10,7 +10,7 @@ export default async function Home() {
   const session = await getServerSession(authoption);
 
   return (
-    <main className="w-full min-h-screen bg-white">
+    <main className="w-full min-h-screen bg-white ">
       {/* Hero Section */}
       <div className="w-full h-[90vh] flex justify-center items-center">
         <div className="w-4/6 mx-auto text-center flex flex-col items-center">
@@ -45,7 +45,9 @@ export default async function Home() {
       </div>
 
       {/* Features Section */}
-      <section className="w-full py-20 bg-gray-100" id="about">
+      {/* <hr /> */}
+      {/* bg-gradient-to-r from-white  to-blue-100 */}
+      <section className="w-full py-20 bg-gray-100 " id="about">
         <div className="w-4/6 mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">
             Why Choose Us?
@@ -101,21 +103,21 @@ export default async function Home() {
             What Creators Say
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 shadow-md rounded-lg">
+            <div className="p-6 shadow-md rounded-lg bg-white">
               <p className="text-gray-600 italic">
                 "This platform has helped me turn my hobby into a profession. I
                 couldn't be happier!"
               </p>
               <h4 className="text-lg font-bold mt-4">- Jane Doe</h4>
             </div>
-            <div className="p-6 shadow-md rounded-lg">
+            <div className="p-6 shadow-md rounded-lg bg-white">
               <p className="text-gray-600 italic">
                 "The simplicity of this platform is unmatched. Highly
                 recommend!"
               </p>
               <h4 className="text-lg font-bold mt-4">- John Smith</h4>
             </div>
-            <div className="p-6 shadow-md rounded-lg">
+            <div className="p-6 shadow-md rounded-lg bg-white">
               <p className="text-gray-600 italic">
                 "A game-changer for creators everywhere. Support made easy!"
               </p>

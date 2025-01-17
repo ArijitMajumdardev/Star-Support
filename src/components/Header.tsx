@@ -27,8 +27,16 @@ const Header = () => {
           {/* Brand Section */}
           <div className="flex-1 flex items-center justify-center font-semibold text-2xl">
             <Link href="/" className='flex '>
-              <Image src={"/soda_icon.png"} alt='logo' width={36} height={36} />
-              <span>Buy me a coke</span>
+            <div className="mr-3 bg-red-300 p-1 rounded flex items-center justify-center">
+      <Image
+        src="/star_logo3.png"
+        alt="logo"
+        width={36}
+        height={36}
+        className="rounded "
+      />
+    </div>
+              <span>StarSupport</span>
             </Link>
           </div>
 
@@ -46,9 +54,9 @@ const Header = () => {
             <Link href="#faq" className="hover:text-red-500 transition duration-300">
               FAQ
             </Link>
-            <Link href="/contact" className="hover:text-red-500 transition duration-300">
+            {/* <Link href="/contact" className="hover:text-red-500 transition duration-300">
               Contact
-            </Link>
+            </Link> */}
             {session ? (
               // <Link
               //   href="/profile"

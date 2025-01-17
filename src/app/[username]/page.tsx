@@ -5,7 +5,7 @@ import { ProfileInfoModel } from "@/models/profileInfo"
 import Image from "next/image"
 import Script from "next/script"
 import { Toaster } from "react-hot-toast"
-import { FaCoffee } from "react-icons/fa"
+import { FaCoffee, FaStar, FaStarHalf } from "react-icons/fa"
 import { LuCoffee } from "react-icons/lu"
 
 type Props = {
@@ -22,14 +22,23 @@ export default async function singleProfilePage({ params } : Props) {
     
     if (!profileInfoDoc) {
         return (
-            <div>
-                Profile Not Found
-            </div>
+            
+                <div className="w-full min-h-screen flex justify-center items-center bg-gradient-to-r from-white  to-red-200">
+        <div className="text-center bg-white p-10 rounded-xl shadow-lg max-w-md w-full">
+          <h1 className="text-4xl font-bold text-gray-800 mb-6">404</h1>
+          <p className="text-xl text-gray-600 mb-6">
+            Creator Not Found
+          </p>
+         
+          
+        </div>
+      </div>
+            
         )
     }
 
 
-    const donations: Donation[] = await DonationModel.find({ paid: true, email: profileInfoDoc.email });
+    const donations: Donation[] = await DonationModel.find({ paid: true, email: profileInfoDoc.email }).sort({amount:-1});
     
     return (
         <div className="min-h-screen">
@@ -50,7 +59,7 @@ export default async function singleProfilePage({ params } : Props) {
                             {profileInfoDoc.displayName}
                         </h1>
                         <h2 className="flex gap-1  items-center">
-                            <LuCoffee  />
+                        <FaStar size={12} className="mt-1" />
                             <span>/</span>
                             <span>{profileInfoDoc.username}</span>
                            

@@ -36,10 +36,10 @@ label.input-label{
 }
 
 button.amount{
-  @apply rounded-full size-12 border border-yellow-300 justify-center inline-flex items-center;
+  @apply rounded-full size-12 border border-red-300 justify-center inline-flex items-center;
 }
 button.amount.active{
-  @apply bg-yellow-300;
+  @apply bg-red-300;
 }
 
 button.crypto{
