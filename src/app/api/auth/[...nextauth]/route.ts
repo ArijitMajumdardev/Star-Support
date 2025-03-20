@@ -1,5 +1,3 @@
-// import clientPromise from "@/lib/db"
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import NextAuth, { AuthOptions, Session } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { connectDB } from "@/lib/database"
